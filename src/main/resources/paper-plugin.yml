@@ -1,0 +1,11 @@
+name: MobFarmLimiter
+version: '${version}'
+description: '${description}'
+main: me.metapho.mobfarmlimiter.MobFarmLimiter
+api-version: '1.21'
+authors: [ metapho ]
+folia-supported: true
+
+permissions:
+  mobfarmlimiter.command.reload:
+    default: op
