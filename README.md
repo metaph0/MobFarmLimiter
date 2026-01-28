@@ -15,14 +15,14 @@ These are default values; you can add as many sections as needed to the configur
 ```
 mob-limits:
   # The entity type to apply the limit
-  # https://jd.papermc.io/paper/1.21.1/org/bukkit/entity/EntityType.html
+  # https://jd.papermc.io/paper/1.21.11/org/bukkit/entity/EntityType.html
   pillager:
     # Radius (in blocks) to check for nearby entities
     radius: 36
     # Maximum number of entities allowed within the radius
     count: 100
     # List of spawn reasons to apply this limit
-    # Reference: https://jd.papermc.io/paper/1.21.1/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+    # Reference: https://jd.papermc.io/paper/1.21.11/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
     # Multiple spawn reasons can be specified.
     # If empty [], all spawn reasons are applied.
     reasons:
