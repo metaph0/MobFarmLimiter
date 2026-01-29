@@ -5,24 +5,19 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import me.metapho.mobfarmlimiter.MobFarmLimiter;
+import me.metapho.mobfarmlimiter.command.argument.ReloadArgument;
 
 public class MobFarmLimiterCommand {
 
-    public static LiteralCommandNode<CommandSourceStack> createCommand(MobFarmLimiter plugin) {
-        return Commands.literal("mobfarmlimiter")
+    public static LiteralCommandNode<CommandSourceStack> createCommand(String root, MobFarmLimiter plugin) {
+        return Commands.literal(root)
                 .executes(ctx -> {
-                    ctx.getSource().getSender().sendRichMessage("<green>MobFarmLimiter</green> " + plugin.getPluginMeta().getVersion());
-                    ctx.getSource().getSender().sendRichMessage("<green>Author:</green> metapho");
+                    ctx.getSource().getSender().sendRichMessage(
+                            "<green>MobFarmLimiter</green> " + plugin.getPluginMeta().getVersion() + "<br>" +
+                            "<green>Authors:</green>" + plugin.getPluginMeta().getAuthors());
                     return Command.SINGLE_SUCCESS;
                 })
-                .then(Commands.literal("reload")
-                        .requires(ctx -> ctx.getSender().hasPermission("mobfarmlimiter.command.reload"))
-                        .executes(ctx -> {
-                            plugin.reload();
-                            ctx.getSource().getSender().sendRichMessage("<green>MobFarmLimiter reloaded successfully.</green>");
-                            return Command.SINGLE_SUCCESS;
-                        })
-                )
+                .then(ReloadArgument.build(plugin))
                 .build();
     }
 }

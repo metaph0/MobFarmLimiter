@@ -33,9 +33,10 @@ public final class MobFarmLimiter extends JavaPlugin {
     }
 
     private void registerCommands() {
-        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
-                event -> event.registrar().register(MobFarmLimiterCommand.createCommand(this),
-                        "MobFarmLimiter Reload Command"));
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            event.registrar().register(MobFarmLimiterCommand.createCommand("mobfarmlimiter", this), "MobFarmlimiter Command");
+            event.registrar().register(MobFarmLimiterCommand.createCommand("mfl", this), "MobFarmlimiter Command Alias");
+        });
     }
 
     private void registerBStats() {
