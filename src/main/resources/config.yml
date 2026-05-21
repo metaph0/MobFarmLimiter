@@ -21,7 +21,7 @@ mob-limits:
       - NETHER_PORTAL
 
   boat:
-  # This section limits manually placed items like Armor Stands, Boats, Minecarts, and End Crystals.
+    # This section limits manually placed items like Armor Stands, Boats, Minecarts, and End Crystals.
     radius: 16
     count: 10
-  # Do not add a "reasons" section here, it is not needed.
+    # Do not add a "reasons" section here, it is not needed.
