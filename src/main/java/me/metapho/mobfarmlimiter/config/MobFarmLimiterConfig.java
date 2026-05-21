@@ -43,7 +43,6 @@ public class MobFarmLimiterConfig {
             ConfigurationSection entrySection = section.getConfigurationSection(key);
             if (entrySection == null) continue;
 
-
             int radius = entrySection.getInt("radius", 16);
             int count = entrySection.getInt("count", 32);
             List<String> reasonStrings = entrySection.getStringList("reasons");
