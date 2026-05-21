@@ -1,7 +1,7 @@
 plugins {
     `java-library`
-    id("com.gradleup.shadow") version "9.3.1"
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("com.gradleup.shadow") version "9.4.1"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
 }
 
 repositories {
@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    implementation("org.bstats:bstats-bukkit:3.1.0")
+    implementation("org.bstats:bstats-bukkit:3.2.1")
 }
 
 tasks {
@@ -34,8 +34,27 @@ tasks {
         relocate("org.bstats", project.group.toString())
     }
 
+    val version = "1.21.11"
+    val jvmArgsExternal = listOf("-Dcom.mojang.eula.agree=true")
+
+    val presetPlugins = runPaper.downloadPluginsSpec {
+        url("https://cdn.modrinth.com/data/HYKaKraK/versions/ap8qHs7D/packetevents-spigot-2.12.1.jar")
+        url("https://github.com/ViaVersion/ViaVersion/releases/download/5.9.0/ViaVersion-5.9.0.jar")
+        url("https://github.com/ViaVersion/ViaBackwards/releases/download/5.9.0/ViaBackwards-5.9.0.jar")
+    }
+
+
     runServer {
-        minecraftVersion("1.21.1")
-        jvmArgs("-Dcom.mojang.eula.agree=true")
+        minecraftVersion(version)
+        runDirectory = rootDir.resolve("run/paper/$version")
+        downloadPlugins { (from(presetPlugins)) }
+        jvmArgs = jvmArgsExternal
+    }
+
+    runPaper.folia.registerTask {
+        minecraftVersion(version)
+        runDirectory = rootDir.resolve("run/folia/$version")
+        downloadPlugins { (from(presetPlugins)) }
+        jvmArgs = jvmArgsExternal
     }
 }
